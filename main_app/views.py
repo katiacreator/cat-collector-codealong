@@ -1,16 +1,20 @@
 from django.shortcuts import render
+from .models import Cat
 
 # Add the following import
-from django.http import HttpResponse
+# from django.http import HttpResponse-NOT USING IT AFTER UPDATING HOME FUNCTION IN PT 2
+
 
 # Define the home view
 def home(request):
-  return HttpResponse('<h1>Hello ᓚᘏᗢ</h1>')
+  return render(request, 'home.html')
   
 # Define the about view
 def about(request):
    return render(request, 'about.html')
 
+
 # Define the all cats view
 def cats_index(request):
-   return render(request, 'cats.html')
+  cats = Cat.objects.all()
+  return render(request, 'cats/index.html', { 'cats': cats })
